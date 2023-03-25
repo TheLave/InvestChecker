@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'thelave.nl:6969',
+  apiUrl: 'https://thelave.nl:6969',
 };

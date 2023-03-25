@@ -65,7 +65,7 @@ export class ItemService {
 
   getItemData(code: number) {
     return this.http.get<BuffItem>(
-      `http://${environment.apiUrl}/buffitem?itemcode=${code}`
+      `${environment.apiUrl}/buffitem?itemcode=${code}`
     );
   }
 
