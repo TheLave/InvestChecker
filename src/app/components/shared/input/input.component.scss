@@ -1,0 +1,105 @@
+.input {
+  min-height: 55px;
+  height: fit-content;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  position: relative;
+
+  .label {
+    position: absolute;
+    width: calc(100% - 5px);
+    top: 0;
+    left: 0;
+    z-index: 99;
+    line-height: 55px;
+    vertical-align: middle;
+    color: black;
+    padding-left: 5px;
+    transition: 0.2s;
+    pointer-events: none;
+    overflow: hidden;
+
+    &.textarea {
+      line-height: 49.5px;
+    }
+
+    &.focus {
+      color: dodgerblue;
+      margin: 3px 0 0 0;
+      line-height: 12px;
+      font-size: 12px;
+    }
+  }
+
+  &:focus-within {
+    border: 1px solid dodgerblue;
+
+    .label {
+      color: dodgerblue;
+      margin: 3px 0 0 0;
+      line-height: 12px;
+      font-size: 12px;
+    }
+  }
+
+  &:hover:not(:focus-within) {
+    border: 1px solid black;
+  }
+
+  .content {
+    height: 100%;
+
+    input,
+    textarea {
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+      min-height: 55px;
+      background-color: transparent;
+      width: 100%;
+      border: none;
+      outline: none;
+      color: #333;
+      padding-left: 5px;
+      padding-top: 10px;
+      line-height: 20px;
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+      font-size: 20px;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+
+    textarea {
+      padding-top: 16px;
+      line-height: 21px;
+      resize: none;
+    }
+  }
+}
+
+.secondary {
+  .content {
+    input {
+      color: white;
+    }
+  }
+  .label.focus {
+    color: white;
+  }
+
+  &.input:focus-within {
+    border: 1px solid white;
+
+    .label {
+      color: white;
+    }
+  }
+}

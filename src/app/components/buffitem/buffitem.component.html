@@ -1,0 +1,104 @@
+<div
+  class="buffitem"
+  [ngStyle]="{
+    'background-color': calculateProfit() > 0 ? '#33691E' : '#F44336'
+  }"
+>
+  <div class="top">
+    <div class="img"><img [src]="item.original_icon_url" alt="" /></div>
+    <div class="data">
+      <div class="header">
+        {{ item.name }}
+        <div class="icons">
+          <div class="icon" (click)="saveItem()">
+            <app-icon src="save" color="white"></app-icon>
+          </div>
+          <div
+            class="icon"
+            (mouseenter)="hover = true"
+            (mouseleave)="hover = false"
+            (click)="onRemove.emit(item.code.toString())"
+          >
+            <app-icon *ngIf="!hover" src="remove" color="white"></app-icon>
+            <app-icon *ngIf="hover" src="remove" color="red"></app-icon>
+          </div>
+        </div>
+      </div>
+      <span>Steam price: &dollar;{{ item.steam_price }}</span>
+    </div>
+  </div>
+  <div class="line"></div>
+  <div class="fields">
+    <div class="inputs">
+      <app-input
+        type="number"
+        [(value)]="item.buyPrice"
+        label="Buyprice"
+        [secondary]="true"
+        (valueChange)="calculateInvestmentValues()"
+      ></app-input>
+      <app-input
+        type="number"
+        [(value)]="item.amount"
+        label="Amount"
+        [secondary]="true"
+        (valueChange)="calculateInvestmentValues()"
+      ></app-input>
+      <app-input
+        type="number"
+        [(value)]="item.tax"
+        label="Tax in %"
+        [secondary]="true"
+        (valueChange)="calculateInvestmentValues()"
+      ></app-input>
+    </div>
+    <table>
+      <tr>
+        <th>Steam price:</th>
+        <td>&dollar;{{ item.steam_price }}</td>
+      </tr>
+      <tr>
+        <th>Sell price after tax:</th>
+        <td>&dollar;{{ item.saleAfterTax | number : "1.2-2" }}</td>
+      </tr>
+      <tr>
+        <th>Profit per item:</th>
+        <td>&dollar;{{ item.profit | number : "1.2-2" }}</td>
+      </tr>
+      <tr>
+        <th>Total buy price:</th>
+        <td>&dollar;{{ item.totalPrice | number : "1.2-2" }}</td>
+      </tr>
+      <tr>
+        <th>Total sell price after tax:</th>
+        <td>&dollar;{{ item.totalSaleAfterTax | number : "1.2-2" }}</td>
+      </tr>
+      <tr>
+        <th>Overall profit:</th>
+        <td>&dollar;{{ item.overallProfit | number : "1.2-2" }}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="line"></div>
+  <div class="listings" *ngIf="item.items.length">
+    <div class="header">
+      {{ listingsOpen ? "Buff listings:" : "Buff listings" }}
+      <div class="icon" (click)="toggleListings()">
+        <app-icon
+          *ngIf="!listingsOpen"
+          src="chevron-down"
+          color="white"
+        ></app-icon>
+        <app-icon
+          *ngIf="listingsOpen"
+          src="chevron-up"
+          color="white"
+        ></app-icon>
+      </div>
+    </div>
+    <ng-container *ngIf="listingsOpen">
+      <div *ngFor="let listing of item.items">&yen;{{ listing.price }}</div>
+    </ng-container>
+  </div>
+  <div class="listings" *ngIf="item.items.length === 0">No buff listings</div>
+</div>

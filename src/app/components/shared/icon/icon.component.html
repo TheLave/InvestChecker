@@ -1,0 +1,10 @@
+<div
+  *ngIf="color"
+  class="img"
+  [ngStyle]="{
+    'background-color': color,
+    '-webkit-mask-image': 'url(' + icon + ')',
+    'mask-image': 'url(' + icon + ')'
+  }"
+></div>
+<div *ngIf="!color" class="img"><img [src]="icon" /></div>

@@ -1,0 +1,20 @@
+<div class="input" [ngClass]="{ secondary: secondary }">
+  <div
+    class="label"
+    [ngClass]="{ focus: !!value, textarea: type === 'textarea' }"
+  >
+    {{ label }}
+  </div>
+  <div class="content" [ngClass]="{ 'has-value': value }">
+    <ng-container *ngIf="type !== 'textarea'">
+      <input [type]="type" [(ngModel)]="value" (input)="valueChanged($event)" />
+    </ng-container>
+    <ng-container *ngIf="type === 'textarea'">
+      <textarea
+        [(ngModel)]="value"
+        (input)="valueChanged($event)"
+        appAutogrow
+      ></textarea>
+    </ng-container>
+  </div>
+</div>
